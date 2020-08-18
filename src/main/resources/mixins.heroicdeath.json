@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "tfar.heroicdeath.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap":"heroicdeath.refmap.json",
+  "mixins": [
+    "CombatTrackerMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

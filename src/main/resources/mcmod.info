@@ -1,0 +1,15 @@
+[
+{
+  "modid": "harvestcrafttweaker",
+  "name": "HarvestCraft Tweaker",
+  "description": "CraftTweaker support for Pam's Harvestcraft.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Tfarecmin"],
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
