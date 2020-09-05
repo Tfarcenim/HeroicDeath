@@ -1,21 +1,21 @@
 package tfar.heroicdeath;
 
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Mod(modid = HeroicDeath.MODID, name = HeroicDeath.NAME, version = HeroicDeath.VERSION)
+@Mod(HeroicDeath.MODID)
 @Mod.EventBusSubscriber
 public class HeroicDeath {
     public static final String MODID = "heroicdeath";
-    public static final String NAME = "Heroic Death";
-    public static final String VERSION = "1.0";
 
     public static Logger logger = LogManager.getLogger();
 
@@ -23,14 +23,17 @@ public class HeroicDeath {
 
     public static MobDeathEntry mobDeathEntry;
 
-    @EventHandler
-    public void post(FMLPreInitializationEvent event) {
-        Setup.parse(event);
+    public HeroicDeath() {
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        bus.addListener(this::post);
+        MinecraftForge.EVENT_BUS.addListener(this::onCommandsRegister);
     }
 
-    @EventHandler
-    public void serverStarting(FMLServerStartingEvent evt) {
-        evt.registerServerCommand(new ModCommands());
+    private void post(FMLCommonSetupEvent event) {
+        Setup.parse();
     }
 
+    private void onCommandsRegister(RegisterCommandsEvent event) {
+        new ModCommand(event.getDispatcher());
+    }
 }

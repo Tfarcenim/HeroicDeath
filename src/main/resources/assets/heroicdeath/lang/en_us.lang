@@ -1,3 +1,0 @@
-commands.heroicdeath.usage=Use /heroicdeath <subcommand>
-commands.heroicdeath.reload.usage=Use /heroicdeath reload
-commands.heroicdeath.reload.success=Reloaded Entries

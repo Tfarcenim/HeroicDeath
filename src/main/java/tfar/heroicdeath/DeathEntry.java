@@ -7,7 +7,7 @@ public class DeathEntry {
 
 	private final List<String> normal;
 	private final List<String> afk;
-	private final Random rand = new Random(7);
+	private final Random rand = new Random();
 
 	public DeathEntry(List<String> normal, List<String> afk) {
 		this.normal = normal;
@@ -15,6 +15,12 @@ public class DeathEntry {
 	}
 
 	public String getRandom(boolean wasafk) {
-		return wasafk ? afk.get(rand.nextInt(afk.size())) : normal.get(rand.nextInt(normal.size()));
+		if (wasafk) {
+			int rng = rand.nextInt(afk.size());
+			return afk.get(rng);
+		} else {
+			int rng = rand.nextInt(normal.size());
+			return normal.get(rng);
+		}
 	}
 }

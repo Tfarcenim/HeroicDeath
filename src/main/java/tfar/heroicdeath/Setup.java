@@ -2,7 +2,8 @@ package tfar.heroicdeath;
 
 import com.google.gson.*;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -116,8 +117,8 @@ public class Setup {
 		}
 	}
 
-	public static void parse(FMLPreInitializationEvent event) {
-		configLocation = event.getModConfigurationDirectory().getAbsolutePath() + "/" + HeroicDeath.MODID;
+	public static void parse() {
+		configLocation = FMLPaths.CONFIGDIR.get() + "/" + HeroicDeath.MODID;
 		reload();
 	}
 }

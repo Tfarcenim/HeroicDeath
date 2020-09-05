@@ -1,7 +1,7 @@
 package tfar.heroicdeath.mixin;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.CombatTracker;
 import net.minecraft.util.text.ITextComponent;
 import org.spongepowered.asm.mixin.Final;
@@ -15,22 +15,13 @@ import tfar.heroicdeath.MixinEvents;
 @Mixin(CombatTracker.class)
 public class CombatTrackerMixin {
 
-	@Shadow @Final private EntityLivingBase fighter;
+	@Shadow @Final public LivingEntity fighter;
 
 	@Inject(method = "getDeathMessage",at = @At("HEAD"),cancellable = true)
 	private void modifyDeathMessage(CallbackInfoReturnable<ITextComponent> text) {
-		if (this.fighter instanceof EntityPlayer) {
-
-			if (MixinEvents.set) {
-				text.setReturnValue(MixinEvents.get);
-				MixinEvents.set = false;
-				return;
-			}
-
-			ITextComponent message = (MixinEvents.getString((CombatTracker)(Object)this));
+		if (this.fighter instanceof PlayerEntity) {
+			ITextComponent message = MixinEvents.getString((CombatTracker)(Object)this);
 			if (message != null) {
-				MixinEvents.get = message;
-				MixinEvents.set = true;
 				text.setReturnValue(message);
 			}
 		}

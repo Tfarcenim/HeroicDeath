@@ -46,7 +46,7 @@ public class MobDeathEntry {
 		} else if (entityType.equals(biggest)) {
 			List<String> normalEntries = list.get(entityType).normal;
 			if (normalEntries.isEmpty()) {
-				HeroicDeath.logger.warn("no normal entry found for "+entityType);
+				HeroicDeath.logger.warn("no normal entry found for " + entityType);
 				return null;
 			}
 			return normalEntries.get(random.nextInt(normalEntries.size()));

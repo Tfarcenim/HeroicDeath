@@ -1,13 +1,12 @@
 package tfar.heroicdeath;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.CombatEntry;
 import net.minecraft.util.CombatTracker;
+import net.minecraft.util.Util;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraft.util.text.TranslationTextComponent;
 
 public class MixinEvents {
 
@@ -17,17 +16,17 @@ public class MixinEvents {
 	public static ITextComponent get = null;
 
 	public static ITextComponent getString(CombatTracker combatTracker) {
-		EntityPlayerMP player = (EntityPlayerMP) combatTracker.fighter;
+		ServerPlayerEntity player = (ServerPlayerEntity) combatTracker.fighter;
 		boolean afk = player.getLastActiveTime() > 0L
 						&& player.server.getMaxPlayerIdleMinutes() > 0
-						&& MinecraftServer.getCurrentTimeMillis() - player.getLastActiveTime() > player.server.getMaxPlayerIdleMinutes()  * 1000 * 6;
+						&& Util.milliTime() - player.getLastActiveTime() > player.server.getMaxPlayerIdleMinutes()  * 1000 * 6;
 
 		if (combatTracker.combatEntries.isEmpty()) {
 			if (HeroicDeath.registry.get("generic") == null) {
 				HeroicDeath.logger.warn("no death message found for damage source generic");
 				return null;
 			}
-			return new TextComponentTranslation(HeroicDeath.registry.get("generic").getRandom(afk), combatTracker.fighter.getDisplayName());
+			return new TranslationTextComponent(HeroicDeath.registry.get("generic").getRandom(afk), combatTracker.fighter.getDisplayName());
 		} else {
 			CombatEntry biggestDeathCause = combatTracker.getBestCombatEntry();
 			CombatEntry lastDeathCause = combatTracker.combatEntries.get(combatTracker.combatEntries.size() - 1);
@@ -42,7 +41,7 @@ public class MixinEvents {
 
 				if ("mob".equals(damageName)) {
 
-					String entityType = EntityRegistry.getEntry(killer.getClass()).getRegistryName().toString();
+					String entityType = killer.getType().getRegistryName().toString();
 
 					String biggest = biggestDeathCause != null ? biggestDeathCause.getDamageSrc().damageType : null;
 
@@ -51,13 +50,13 @@ public class MixinEvents {
 					if (message == null) return null;
 
 					else {
-							return new TextComponentTranslation(message,
+							return new TranslationTextComponent(message,
 											combatTracker.fighter.getDisplayName());
 					}
 
 				} else {
 
-					return new TextComponentTranslation(HeroicDeath.registry.get(damageName).getRandom(afk),
+					return new TranslationTextComponent(HeroicDeath.registry.get(damageName).getRandom(afk),
 									combatTracker.fighter.getDisplayName());
 				}
 			}
