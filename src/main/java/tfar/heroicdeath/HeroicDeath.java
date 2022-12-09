@@ -34,6 +34,6 @@ public class HeroicDeath {
     }
 
     private void onCommandsRegister(RegisterCommandsEvent event) {
-        new ModCommand(event.getDispatcher());
+        ModCommand.command(event.getDispatcher());
     }
 }
