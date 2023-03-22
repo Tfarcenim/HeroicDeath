@@ -1,0 +1,14 @@
+{
+  "normal": [
+    "%s tried to fight against issac newton and lost.",
+    "%s miscalculated their fall juuuuust a bit.",
+    "%s got squashed into the ground.",
+    "%s threw themself at the ground and succeeded",
+    "%s was unable to parry the planet",
+    "%s didn't bounce"
+  ],
+
+  "afk" : [
+    "%s sleepwalked off a cliff"
+  ]
+}

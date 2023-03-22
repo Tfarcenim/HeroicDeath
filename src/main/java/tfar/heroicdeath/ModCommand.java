@@ -12,6 +12,7 @@ public class ModCommand {
 	public static void command(CommandDispatcher<CommandSourceStack> dispatcher) {
 		dispatcher.register(LiteralArgumentBuilder.<CommandSourceStack>literal(HeroicDeath.MODID)
 				.then(reload())
+				.then(defaults())
 		);
 	}
 
@@ -25,4 +26,16 @@ public class ModCommand {
 						}
 				);
 	}
+
+	public static ArgumentBuilder<CommandSourceStack, ?> defaults() {
+		return Commands.literal("defaults")
+				.requires(cs->cs.hasPermission(2)) //permission
+				.executes(ctx -> {
+							Setup.reload();
+							ctx.getSource().sendSuccess( new TranslatableComponent("commands.heroicdeath.reload.success"),true);
+							return 0;
+						}
+				);
+	}
+
 }

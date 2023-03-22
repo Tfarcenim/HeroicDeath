@@ -1,0 +1,22 @@
+[
+  {
+    "minecraft:creeper": {
+      "afk" : ["afk event"],
+      "normal" :["normal event"],
+      "biggest": {
+        "fall" : ["fall event"],
+        "lava" : ["lava event"]
+      }
+    }
+  },
+  {
+    "minecraft:skeleton": {
+      "afk" : ["afk event"],
+      "normal" :["normal event"],
+      "biggest": {
+        "fall" : ["fall event"],
+        "lava" : ["lava event"]
+      }
+    }
+  }
+]
