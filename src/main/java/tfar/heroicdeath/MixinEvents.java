@@ -1,6 +1,7 @@
 package tfar.heroicdeath;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.CombatEntry;
@@ -19,7 +20,7 @@ public class MixinEvents {
 		ServerPlayer player = (ServerPlayer) combatTracker.mob;
 		boolean afk = player.getLastActionTime() > 0L
 						&& player.server.getPlayerIdleTimeout() > 0
-						&& Util.getMillis() - player.getLastActionTime() > player.server.getPlayerIdleTimeout()  * 1000 * 6;
+						&& Util.getMillis() - player.getLastActionTime() > player.server.getPlayerIdleTimeout()  * 1000L * 6L;
 
 		if (combatTracker.entries.isEmpty()) {
 			if (HeroicDeath.registry.get("generic") == null) {
@@ -41,7 +42,7 @@ public class MixinEvents {
 
 				if ("mob".equals(damageName)) {
 
-					String entityType = Registry.ENTITY_TYPE.getKey(killer.getType()).toString();
+					String entityType = BuiltInRegistries.ENTITY_TYPE.getKey(killer.getType()).toString();
 
 					String biggest = biggestDeathCause != null ? biggestDeathCause.getSource().msgId : null;
 
