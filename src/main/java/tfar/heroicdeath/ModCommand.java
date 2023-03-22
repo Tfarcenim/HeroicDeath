@@ -5,7 +5,7 @@ import com.mojang.brigadier.builder.ArgumentBuilder;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 
 public class ModCommand {
 
@@ -21,7 +21,7 @@ public class ModCommand {
 				.requires(cs->cs.hasPermission(2)) //permission
 				.executes(ctx -> {
 							Setup.reload();
-							ctx.getSource().sendSuccess( new TranslatableComponent("commands.heroicdeath.reload.success"),true);
+							ctx.getSource().sendSuccess(Component.translatable("commands.heroicdeath.reload.success"),true);
 							return 0;
 						}
 				);
@@ -32,7 +32,7 @@ public class ModCommand {
 				.requires(cs->cs.hasPermission(2)) //permission
 				.executes(ctx -> {
 							Setup.reload();
-							ctx.getSource().sendSuccess( new TranslatableComponent("commands.heroicdeath.reload.success"),true);
+							ctx.getSource().sendSuccess(Component.translatable("commands.heroicdeath.reload.success"),true);
 							return 0;
 						}
 				);

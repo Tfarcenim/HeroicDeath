@@ -1,8 +1,6 @@
 package tfar.heroicdeath;
 
 import com.google.gson.*;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.loading.FMLPaths;
 
 import java.io.File;
@@ -13,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Mod.EventBusSubscriber
 public class Setup {
 
 	public static Gson g = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
