@@ -21,7 +21,7 @@ public class ModCommand {
 				.requires(cs->cs.hasPermission(2)) //permission
 				.executes(ctx -> {
 							Setup.reload();
-							ctx.getSource().sendSuccess(Component.translatable("commands.heroicdeath.reload.success"),true);
+							ctx.getSource().sendSuccess(() -> Component.translatable("commands.heroicdeath.reload.success"),true);
 							return 0;
 						}
 				);
@@ -32,7 +32,7 @@ public class ModCommand {
 				.requires(cs->cs.hasPermission(2)) //permission
 				.executes(ctx -> {
 							Setup.reload();
-							ctx.getSource().sendSuccess(Component.translatable("commands.heroicdeath.reload.success"),true);
+							ctx.getSource().sendSuccess(() -> Component.translatable("commands.heroicdeath.reload.success"),true);
 							return 0;
 						}
 				);
